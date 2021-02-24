@@ -6,7 +6,24 @@ public class Man extends Human {
     }
 
     public Human executeMission(Human human) {
-
-        return null;
+        if (human.isGender() && this.speak(human) && this.spendTimeTogether(human)) {
+            System.out.println("Birth of a son");
+            System.out.println("Build a house");
+            return null;
+        } else if (!human.isGender() && this.speak(human) && this.spendTimeTogether(human)) {
+            System.out.println("Build a house");
+            return null;
+        } else if (human.isGender() && this.speak(human) && !this.tolerate(human)) {
+            System.out.println("Birth of a son");
+            System.out.println("Plant a tree");
+            return null;
+        } else if (this.speak(human) && !this.tolerate(human)) {
+            System.out.println("Plant a tree");
+            return null;
+        } else if (human.isGender()) {
+            System.out.println("Birth of a son");
+            return null;
+        }
+        else return null;
     }
 }
