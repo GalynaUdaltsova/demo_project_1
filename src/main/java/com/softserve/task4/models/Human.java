@@ -25,8 +25,13 @@ public class Human {
         return true;
     }
 
+    public float percentDifference(float n1, float n2) {
+
+        return ((n1 - n2) / ((n1 + n2) / 2)) * 100;
+    }
+
     public boolean spendTimeTogether(Human human) {
-        if ((((human.getHeight() / this.getHeight()) * 100) - 100) <= 10) {
+        if ((percentDifference(this.getHeight(), human.getHeight())) > 10) {
             return Math.random() <= 0.95;
         } else {
             return Math.random() <= 0.85;
