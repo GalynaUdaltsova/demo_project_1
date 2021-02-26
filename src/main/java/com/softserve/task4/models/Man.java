@@ -11,9 +11,9 @@ public class Man extends Human {
         } else if (this.speak(human) && !this.tolerate(human)) {
             System.out.println("Plant a tree");
         } else {
-            if (this.isGender() && !human.isGender()) {
+            if (this.getGender() && !human.getGender()) {
                 Human child = ((Woman) human).giveBirthTo(this);
-                if (child.isGender()) {
+                if (child.getGender()) {
                     System.out.println("Birth of a son");
                 } else {
                     return child;
