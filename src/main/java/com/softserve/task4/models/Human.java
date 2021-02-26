@@ -16,13 +16,29 @@ public class Human {
     }
 
     public boolean speak(Human human) {
-
-        return true;
+        if (!this.gender && !human.gender) {
+            return true;
+        }
+        if (!this.gender) {
+            return true;
+        }
+        if (!human.gender) {
+            return true;
+        }
+        return Math.random() < 0.5;
     }
 
     protected boolean tolerate(Human human) {
-
-        return true;
+        if (!this.gender && !human.gender) {
+            return Math.random() < 0.05;
+        }
+        if (!this.gender) {
+            return Math.random() < 0.7;
+        }
+        if (!human.gender) {
+            return Math.random() < 0.7;
+        }
+        return Math.random() < 0.056;
     }
 
     protected boolean spendTimeTogether(Human human) {
@@ -35,7 +51,7 @@ public class Human {
         return null;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 
