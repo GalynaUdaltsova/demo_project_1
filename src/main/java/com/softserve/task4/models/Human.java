@@ -43,7 +43,7 @@ public class Human {
         return null;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 
