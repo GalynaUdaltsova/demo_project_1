@@ -16,8 +16,15 @@ public class Human {
     }
 
     public boolean speak(Human human) {
-
-        return true;
+        if (!this.getGender() && !human.getGender()) {
+            return true;
+        } else if (!this.getGender() && human.getGender()) {
+            return true;
+        } else if (this.getGender() && !human.getGender()) {
+            return true;
+        } else {
+            return Math.random() <= 0.5;
+        }
     }
 
     protected boolean tolerate(Human human) {
@@ -25,12 +32,12 @@ public class Human {
         return true;
     }
 
-    public float percentDifference(float n1, float n2) {
+    protected float percentDifference(float n1, float n2) {
 
         return ((n1 - n2) / ((n1 + n2) / 2)) * 100;
     }
 
-    public boolean spendTimeTogether(Human human) {
+    protected boolean spendTimeTogether(Human human) {
         if ((percentDifference(this.getHeight(), human.getHeight())) > 10) {
             return Math.random() <= 0.95;
         } else {
