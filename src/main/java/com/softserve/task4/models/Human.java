@@ -15,37 +15,38 @@ public class Human {
         this.weight = weight;
     }
 
-    public boolean speak(Human human) {
+    protected boolean speak(Human human) {
         return true;
     }
 
     protected boolean tolerate(Human human) {
-        return true;
+        if (this.gender && human.gender) {
+            //if both male
+            return Math.random() <= 0.056;
+        } else if (!this.gender && !human.gender) {
+            //if both female
+            return Math.random() <= 0.05;
+        } else {
+            return Math.random() <= 0.7;
+        }
     }
 
-    public boolean spendTimeTogether(Human human) {
+    protected boolean spendTimeTogether(Human human) {
        return true;
-    }
-//Ann:
-    public Human giveBirthTo(Human human) {
-        return null;
     }
 
     public Human haveRelationship(Human human) {
         if (this.gender == human.gender) {
-            System.out.println("Sorry, did not work out");
-            return null;
-        } else if (this.speak(human) && this.tolerate(human) && this.spendTimeTogether(human)) {
-            Human child = this.isGender() ? human.giveBirthTo(this) : this.giveBirthTo(human);
-            System.out.println("That is how your child may look like: " + child.toString());
-            return child;
-        } else {
-            System.out.println("Sorry, did not work out. Broken up.");
             return null;
         }
+        if (this.speak(human) && this.tolerate(human) && this.spendTimeTogether(human)) {
+            Human child = this.getGender() ? ((Woman) human).giveBirthTo(this) : ((Woman) this).giveBirthTo(human);
+            return child;
+        }
+       return null;
     }
-//
-    public boolean isGender() {
+
+    public boolean getGender() {
         return gender;
     }
 
@@ -85,9 +86,8 @@ public class Human {
         this.weight = weight;
     }
 
-//Ann:
     public String whatGender() {
-        return this.isGender() ? "male" : "female";
+        return this.getGender() ? "male" : "female";
     }
 
     public static String capitalizeFirstLetter(String str) {
@@ -108,5 +108,5 @@ public class Human {
                 ", weight: " + weight +
                 '}';
     }
-    //
+
 }
