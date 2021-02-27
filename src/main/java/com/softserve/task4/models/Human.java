@@ -15,7 +15,7 @@ public class Human {
         this.weight = weight;
     }
 
-    public boolean speak(Human human) {
+    protected boolean speak(Human human) {
 
         return true;
     }
