@@ -15,9 +15,22 @@ public class Human {
         this.weight = weight;
     }
 
+
+    public boolean speak(Human human) {
+        if (!this.getGender() && !human.getGender()) {
+            return true;
+        } else if (!this.getGender() && human.getGender()) {
+            return true;
+        } else if (this.getGender() && !human.getGender()) {
+            return true;
+        } else {
+            return Math.random() <= 0.5;
+        }
+
     protected boolean speak(Human human) {
 
         return true;
+
     }
 
     protected boolean tolerate(Human human) {
@@ -32,8 +45,22 @@ public class Human {
         }
     }
 
+
+    protected float percentDifference(float n1, float n2) {
+
+        return ((n1 - n2) / ((n1 + n2) / 2)) * 100;
+    }
+
+    protected boolean spendTimeTogether(Human human) {
+        if ((percentDifference(this.getHeight(), human.getHeight())) > 10) {
+            return Math.random() <= 0.95;
+        } else {
+            return Math.random() <= 0.85;
+        }
+
     protected boolean spendTimeTogether(Human human) {
        return true;
+
     }
 
     public Human haveRelationship(Human human) {
