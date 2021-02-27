@@ -23,8 +23,6 @@ public class Man extends Human {
                 return null;
             }
         }
-
         return null;
     }
-
 }
