@@ -16,6 +16,7 @@ public class Human {
     }
 
     protected boolean speak(Human human) {
+
         return true;
     }
 
