@@ -7,6 +7,10 @@ public class Human {
     protected float height;
     protected float weight;
 
+    public Human(boolean gender) {
+        this.gender = gender;
+    }
+
     public Human(boolean gender, String firstName, String lastName, float height, float weight) {
         this.gender = gender;
         this.firstName = firstName;

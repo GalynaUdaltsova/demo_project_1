@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleService {
+public class ConsoleService implements ITesterService {
 
     private HumanService humanService;
 

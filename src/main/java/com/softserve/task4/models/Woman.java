@@ -1,6 +1,11 @@
 package com.softserve.task4.models;
 
 public class Woman extends Human {
+
+    public Woman() {
+        super(false);
+    }
+
     public Woman(String firstName, String lastName, float height, float weight) {
         super(false, firstName, lastName, height, weight);
     }
