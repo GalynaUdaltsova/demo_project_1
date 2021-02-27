@@ -6,7 +6,7 @@ public class Man extends Human {
     }
 
     public Human executeMission(Human human) {
-
         return null;
     }
+
 }
