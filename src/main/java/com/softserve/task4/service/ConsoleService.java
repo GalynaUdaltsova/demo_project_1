@@ -21,7 +21,7 @@ public class ConsoleService {
         List<Human> dataFromConsole = getDataFromConsole();
         Human child = humanService.compatibilityTest(dataFromConsole.get(0), dataFromConsole.get(1));
         if (child == null) {
-            System.out.println("Nothing is happened... scattered...");
+            System.out.println("Nothing is happened...");
             return;
         }
         String childGender = child.getGender() ? "son" : "daughter";
