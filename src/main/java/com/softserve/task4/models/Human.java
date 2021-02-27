@@ -15,6 +15,7 @@ public class Human {
         this.weight = weight;
     }
 
+
     public boolean speak(Human human) {
         if (!this.getGender() && !human.getGender()) {
             return true;
@@ -25,12 +26,25 @@ public class Human {
         } else {
             return Math.random() <= 0.5;
         }
+
+    protected boolean speak(Human human) {
+
+        return true;
+
     }
 
     protected boolean tolerate(Human human) {
-
-        return true;
+        if (this.gender && human.gender) {
+            //if both male
+            return Math.random() <= 0.056;
+        } else if (!this.gender && !human.gender) {
+            //if both female
+            return Math.random() <= 0.05;
+        } else {
+            return Math.random() <= 0.7;
+        }
     }
+
 
     protected float percentDifference(float n1, float n2) {
 
@@ -43,11 +57,21 @@ public class Human {
         } else {
             return Math.random() <= 0.85;
         }
+
+    protected boolean spendTimeTogether(Human human) {
+       return true;
+
     }
 
     public Human haveRelationship(Human human) {
-
-        return null;
+        if (this.gender == human.gender) {
+            return null;
+        }
+        if (this.speak(human) && this.tolerate(human) && this.spendTimeTogether(human)) {
+            Human child = this.getGender() ? ((Woman) human).giveBirthTo(this) : ((Woman) this).giveBirthTo(human);
+            return child;
+        }
+       return null;
     }
 
     public boolean getGender() {
@@ -90,14 +114,27 @@ public class Human {
         this.weight = weight;
     }
 
+    public String whatGender() {
+        return this.getGender() ? "male" : "female";
+    }
+
+    public static String capitalizeFirstLetter(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
+    public static String getFullName(Human human) {
+        return capitalizeFirstLetter(human.getFirstName()) + " " + capitalizeFirstLetter(human.getLastName());
+    }
+
     @Override
     public String toString() {
-        return "task_at_4.models.Human{" +
-                "gender=" + gender +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
+        return "{" +
+                "gender: " + whatGender() +
+                ", firstName: " + capitalizeFirstLetter(firstName) +
+                ", lastName: " + capitalizeFirstLetter(lastName) +
+                ", height: " + height +
+                ", weight: " + weight +
                 '}';
     }
+
 }

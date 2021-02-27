@@ -6,6 +6,7 @@ public class Man extends Human {
     }
 
     public Human executeMission(Human human) {
+
         if (this.speak(human) && this.spendTimeTogether(human) && !this.tolerate(human)) {
             System.out.println("Build a house");
         } else if (this.speak(human) && !this.tolerate(human)) {
@@ -22,6 +23,8 @@ public class Man extends Human {
                 return null;
             }
         }
+
         return null;
     }
+
 }
