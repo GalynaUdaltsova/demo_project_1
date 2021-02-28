@@ -74,11 +74,11 @@ public class WindowService implements ITesterService {
     }
 
     private void initializeButtons() {
-        compatibilitySubmitButton = new JButton("COMPATIBILITY");
+        compatibilitySubmitButton = new JButton("CHECK COMPATIBILITY");
         compatibilitySubmitButton.setBackground(Color.PINK);
         compatibilitySubmitButton.setForeground(Color.BLACK);
-        compatibilitySubmitButton.setBounds(500, 400, 250, 60);
-        Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 26);
+        compatibilitySubmitButton.setBounds(480, 400, 300, 60);
+        Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 23);
         compatibilitySubmitButton.setFont(compatibilityFont);
 
         clearButton = new JButton("CLEAR");
@@ -216,9 +216,26 @@ public class WindowService implements ITesterService {
     private void initializeFrame() {
         JFrame mainFrame = new JFrame();
         mainFrame.setVisible(true);
-        mainFrame.setBounds(300, 100, 1250, 700);
+        mainFrame.setBounds(300, 100, 1230, 700);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.getContentPane().setLayout(null);
+
+
+        ImageIcon imageManIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\imageMainMan.jpg")
+                .getImage().getScaledInstance(280, 320, Image.SCALE_DEFAULT));
+        JLabel imageManLabel = new JLabel(imageManIcon);
+        imageManLabel.setIcon(imageManIcon);
+        imageManLabel.setBounds(10, 60, 300, 400);
+        mainFrame.add(imageManLabel);
+
+        ImageIcon imageWomanIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\imageMainWoman.jpg")
+                .getImage().getScaledInstance(280, 320, Image.SCALE_DEFAULT));
+        JLabel imageWomanLabel = new JLabel(imageWomanIcon);
+        imageWomanLabel.setIcon(imageWomanIcon);
+        imageWomanLabel.setBounds(900, 60, 300, 400);
+        mainFrame.add(imageWomanLabel);
 
         genderFirst = new JComboBox<>();
         genderFirst.addItem(MALE);
