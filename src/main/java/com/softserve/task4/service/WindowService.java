@@ -18,16 +18,15 @@ public class WindowService implements ITesterService {
     public static final String LAST_NAME = "Last Name";
     public static final String FIRST_NAME = "First Name";
     public static final String GENDER = "Gender";
-    private static final int FIRST_LABEL_X_START = 320;
-    private static final int SECOND_LABEL_X_START = 620;
-    private static final int FIRST_TEXT_X_START = 400;
-    private static final int SECOND_TEXT_X_START = 700;
+    private static final int FIRST_LABEL_X_START = 310;
+    private static final int SECOND_LABEL_X_START = 550;
+    private static final int FIRST_TEXT_X_START = 320;
+    private static final int SECOND_TEXT_X_START = 670;
     private static final int LABEL_WIDTH = 100;
-    private static final int TEXT_HEIGHT = 25;
-    private static final int TEXT_WIDTH = 180;
-    private static final int LABEL_HEIGHT = 200;
-    private static final int FONT_NAME_FRAME = 15;
-    public static final int FONT_TEXT_FRAME = 14;
+    private static final int TEXT_HEIGHT = 30;
+    private static final int TEXT_WIDTH = 200;
+    private static final int FONT_NAME_FRAME = 18;
+    public static final int FONT_TEXT_FRAME = 20;
 
     private JButton missionButton;
     private JButton closeFailedButton;
@@ -75,26 +74,25 @@ public class WindowService implements ITesterService {
 
     private void initializeButtons() {
         compatibilitySubmitButton = new JButton("CHECK COMPATIBILITY");
-        compatibilitySubmitButton.setBackground(Color.PINK);
+        compatibilitySubmitButton.setBackground(new Color(255, 204, 153));
         compatibilitySubmitButton.setForeground(Color.BLACK);
-        compatibilitySubmitButton.setBounds(480, 400, 300, 60);
-        Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 23);
+        compatibilitySubmitButton.setBounds(445, 420, 300, 40);
+        Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 21);
         compatibilitySubmitButton.setFont(compatibilityFont);
 
         clearButton = new JButton("CLEAR");
-        clearButton.setBounds(550, 550, 160, 40);
+        clearButton.setBounds(515, 550, 160, 40);
         Font clearFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         clearButton.setFont(clearFont);
 
-        missionButton = new JButton("MISSION");
-        missionButton.setBounds(100, 150, 160, 40);
-        Font missionBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
-        missionButton.setFont(missionBFont);
-
         closeFailedButton = new JButton("CANCEL");
-        closeFailedButton.setBounds(300, 150, 160, 40);
+        closeFailedButton.setBounds(330, 150, 130, 40);
         Font closeFailedBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         closeFailedButton.setFont(closeFailedBFont);
+
+        missionButton = new JButton("MALE MISSION");
+        Font missionBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
+        missionButton.setFont(missionBFont);
 
         closeMissionButton = new JButton("CLOSE");
         closeMissionButton.setBounds(100, 150, 160, 40);
@@ -102,13 +100,13 @@ public class WindowService implements ITesterService {
         closeMissionButton.setFont(closeMissionFont);
 
         closeChildResultButton = new JButton("CLOSE");
-        closeChildResultButton.setBounds(280, 150, 160, 40);
+        closeChildResultButton.setBounds(280, 250, 160, 40);
         Font closeChildResultFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         closeChildResultButton.setFont(closeChildResultFont);
 
 
         childNameOk = new JButton("OK");
-        childNameOk.setBounds(FIRST_LABEL_X_START, 250, 160, 40);
+        childNameOk.setBounds(FIRST_LABEL_X_START, 300, 200, 40);
         Font childNameOkFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         childNameOk.setFont(childNameOkFont);
     }
@@ -216,7 +214,7 @@ public class WindowService implements ITesterService {
     private void initializeFrame() {
         JFrame mainFrame = new JFrame();
         mainFrame.setVisible(true);
-        mainFrame.setBounds(300, 100, 1230, 700);
+        mainFrame.setBounds(300, 100, 1210, 700);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.getContentPane().setLayout(null);
 
@@ -234,7 +232,7 @@ public class WindowService implements ITesterService {
                 .getImage().getScaledInstance(280, 320, Image.SCALE_DEFAULT));
         JLabel imageWomanLabel = new JLabel(imageWomanIcon);
         imageWomanLabel.setIcon(imageWomanIcon);
-        imageWomanLabel.setBounds(900, 60, 300, 400);
+        imageWomanLabel.setBounds(880, 60, 300, 400);
         mainFrame.add(imageWomanLabel);
 
         genderFirst = new JComboBox<>();
@@ -245,63 +243,33 @@ public class WindowService implements ITesterService {
         genderFirst.setFont(genderFirstFont);
         mainFrame.getContentPane().add(genderFirst);
 
-        JLabel genderLabel = new JLabel(GENDER);
-        genderLabel.setBounds(FIRST_LABEL_X_START, 160, LABEL_WIDTH, 15);
-        Font genderLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
-        genderLabel.setFont(genderLabelFont);
-        mainFrame.getContentPane().add(genderLabel);
-
         firstNameFirstText = new JTextField();
-        firstNameFirstText.setBounds(FIRST_TEXT_X_START, 190, TEXT_WIDTH, TEXT_HEIGHT);
+        firstNameFirstText.setBounds(FIRST_TEXT_X_START, 200, TEXT_WIDTH, TEXT_HEIGHT);
         Font firstNameFirstTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         firstNameFirstText.setFont(firstNameFirstTextFont);
         mainFrame.getContentPane().add(firstNameFirstText);
         firstNameFirstText.setColumns(15);
 
-        JLabel firstNameLabel = new JLabel(FIRST_NAME);
-        firstNameLabel.setBounds(FIRST_LABEL_X_START, 190, LABEL_WIDTH, 17);
-        Font firstNameLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
-        firstNameLabel.setFont(firstNameLabelFont);
-        mainFrame.getContentPane().add(firstNameLabel);
-
         lastNameFirstText = new JTextField();
-        lastNameFirstText.setBounds(FIRST_TEXT_X_START, 220, TEXT_WIDTH, TEXT_HEIGHT);
+        lastNameFirstText.setBounds(FIRST_TEXT_X_START, 240, TEXT_WIDTH, TEXT_HEIGHT);
         Font lastNameFirstTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         lastNameFirstText.setFont(lastNameFirstTextFont);
         mainFrame.getContentPane().add(lastNameFirstText);
         lastNameFirstText.setColumns(15);
 
-        JLabel lastNameLabel = new JLabel(LAST_NAME);
-        lastNameLabel.setBounds(FIRST_LABEL_X_START, 220, LABEL_WIDTH, 19);
-        Font lastNameLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
-        lastNameLabel.setFont(lastNameLabelFont);
-        mainFrame.getContentPane().add(lastNameLabel);
-
         heightFirstText = new JFormattedTextField(0);
-        heightFirstText.setBounds(FIRST_TEXT_X_START, 250, TEXT_WIDTH, TEXT_HEIGHT);
+        heightFirstText.setBounds(FIRST_TEXT_X_START, 280, TEXT_WIDTH, TEXT_HEIGHT);
         Font heightFirstTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         heightFirstText.setFont(heightFirstTextFont);
         mainFrame.getContentPane().add(heightFirstText);
         heightFirstText.setColumns(5);
 
-        JLabel heightLabel = new JLabel(HEIGHT);
-        heightLabel.setBounds(FIRST_LABEL_X_START, 250, LABEL_WIDTH, 21);
-        Font heightLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
-        heightLabel.setFont(heightLabelFont);
-        mainFrame.getContentPane().add(heightLabel);
-
         weightFirstText = new JFormattedTextField(0);
-        weightFirstText.setBounds(FIRST_TEXT_X_START, 280, TEXT_WIDTH, TEXT_HEIGHT);
+        weightFirstText.setBounds(FIRST_TEXT_X_START, 320, TEXT_WIDTH, TEXT_HEIGHT);
         Font weightFirstTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         weightFirstText.setFont(weightFirstTextFont);
         mainFrame.getContentPane().add(weightFirstText);
         weightFirstText.setColumns(3);
-
-        JLabel weightLabel = new JLabel(WEIGHT);
-        weightLabel.setBounds(FIRST_LABEL_X_START, 280, LABEL_WIDTH, 23);
-        Font weightLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        weightLabel.setFont(weightLabelFont);
-        mainFrame.getContentPane().add(weightLabel);
 
         genderSecond = new JComboBox<>();
         genderSecond.addItem(FEMALE);
@@ -311,66 +279,66 @@ public class WindowService implements ITesterService {
         genderSecond.setFont(genderSecondFont);
         mainFrame.getContentPane().add(genderSecond);
 
-        JLabel genderSecondLabel = new JLabel(GENDER);
-        genderSecondLabel.setBounds(SECOND_LABEL_X_START, 160, LABEL_WIDTH, 18);
-        Font genderSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        genderSecondLabel.setFont(genderSecondLabelFont);
-        mainFrame.getContentPane().add(genderSecondLabel);
-
         firstNameSecondText = new JTextField();
-        firstNameSecondText.setBounds(SECOND_TEXT_X_START, 190, TEXT_WIDTH, TEXT_HEIGHT);
+        firstNameSecondText.setBounds(SECOND_TEXT_X_START, 200, TEXT_WIDTH, TEXT_HEIGHT);
         Font firstNameSecondTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         firstNameSecondText.setFont(firstNameSecondTextFont);
         mainFrame.getContentPane().add(firstNameSecondText);
         firstNameSecondText.setColumns(15);
 
-        JLabel firstNameSecondLabel = new JLabel(FIRST_NAME);
-        firstNameSecondLabel.setBounds(SECOND_LABEL_X_START, 190, LABEL_WIDTH, 17);
-        Font firstNameSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        firstNameSecondLabel.setFont(firstNameSecondLabelFont);
-        mainFrame.getContentPane().add(firstNameSecondLabel);
-
         lastNameSecondText = new JTextField();
-        lastNameSecondText.setBounds(SECOND_TEXT_X_START, 220, TEXT_WIDTH, TEXT_HEIGHT);
+        lastNameSecondText.setBounds(SECOND_TEXT_X_START, 240, TEXT_WIDTH, TEXT_HEIGHT);
         Font lastNameSecondTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         lastNameSecondText.setFont(lastNameSecondTextFont);
         mainFrame.getContentPane().add(lastNameSecondText);
         lastNameSecondText.setColumns(15);
 
-        JLabel lastNameSecondLabel = new JLabel(LAST_NAME);
-        lastNameSecondLabel.setBounds(SECOND_LABEL_X_START, 220, LABEL_WIDTH, 19);
-        Font lastNameSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        lastNameSecondLabel.setFont(lastNameSecondLabelFont);
-        mainFrame.getContentPane().add(lastNameSecondLabel);
-
         heightSecondText = new JFormattedTextField(0);
-        heightSecondText.setBounds(SECOND_TEXT_X_START, 250, TEXT_WIDTH, TEXT_HEIGHT);
+        heightSecondText.setBounds(SECOND_TEXT_X_START, 280, TEXT_WIDTH, TEXT_HEIGHT);
         Font heightSecondTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         heightSecondText.setFont(heightSecondTextFont);
         mainFrame.getContentPane().add(heightSecondText);
         heightSecondText.setColumns(5);
 
-        JLabel heightSecondLabel = new JLabel(HEIGHT);
-        heightSecondLabel.setBounds(SECOND_LABEL_X_START, 250, LABEL_WIDTH, 21);
-        Font heightSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        heightSecondLabel.setFont(heightSecondLabelFont);
-        mainFrame.getContentPane().add(heightSecondLabel);
-
         weightSecondText = new JFormattedTextField(0);
-        weightSecondText.setBounds(SECOND_TEXT_X_START, 280, TEXT_WIDTH, TEXT_HEIGHT);
+        weightSecondText.setBounds(SECOND_TEXT_X_START, 320, TEXT_WIDTH, TEXT_HEIGHT);
         Font weightSecondTextFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         weightSecondText.setFont(weightSecondTextFont);
         mainFrame.getContentPane().add(weightSecondText);
         weightSecondText.setColumns(3);
 
-        JLabel weightSecondLabel = new JLabel(WEIGHT);
-        weightSecondLabel.setBounds(SECOND_LABEL_X_START, 280, LABEL_WIDTH, 23);
+        JLabel genderLabel = new JLabel(GENDER);
+        genderLabel.setBounds(SECOND_LABEL_X_START + 12, 160, LABEL_WIDTH, 18);
+        Font genderSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
+        genderLabel.setFont(genderSecondLabelFont);
+        mainFrame.getContentPane().add(genderLabel);
+
+        JLabel firstNameLabel = new JLabel(FIRST_NAME);
+        firstNameLabel.setBounds(SECOND_LABEL_X_START, 200, LABEL_WIDTH, 17);
+        Font firstNameSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
+        firstNameLabel.setFont(firstNameSecondLabelFont);
+        mainFrame.getContentPane().add(firstNameLabel);
+
+        JLabel lastNameLabel = new JLabel(LAST_NAME);
+        lastNameLabel.setBounds(SECOND_LABEL_X_START, 240, LABEL_WIDTH, 19);
+        Font lastNameSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
+        lastNameLabel.setFont(lastNameSecondLabelFont);
+        mainFrame.getContentPane().add(lastNameLabel);
+
+        JLabel heightLabel = new JLabel(HEIGHT);
+        heightLabel.setBounds(SECOND_LABEL_X_START + 15, 280, LABEL_WIDTH, 21);
+        Font heightSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
+        heightLabel.setFont(heightSecondLabelFont);
+        mainFrame.getContentPane().add(heightLabel);
+
+        JLabel weightLabel = new JLabel(WEIGHT);
+        weightLabel.setBounds(SECOND_LABEL_X_START + 15, 320, LABEL_WIDTH, 23);
         Font weightSecondLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_NAME_FRAME);
-        weightSecondLabel.setFont(weightSecondLabelFont);
-        mainFrame.getContentPane().add(weightSecondLabel);
+        weightLabel.setFont(weightSecondLabelFont);
+        mainFrame.getContentPane().add(weightLabel);
 
         JLabel titleLabel = new JLabel("COMPATIBILITY TEST");
-        titleLabel.setBounds(470, 60, 400, 35);
+        titleLabel.setBounds(430, 60, 400, 35);
         Font titleLabelFont = new Font(Font.DIALOG, Font.BOLD, 32);
         titleLabel.setFont(titleLabelFont);
         mainFrame.getContentPane().add(titleLabel);
@@ -384,11 +352,9 @@ public class WindowService implements ITesterService {
                 String childName = childNameText.getText();
                 humanChild.setFirstName(childName);
                 childNameFrame.dispose();
-                String resultMessage = String.format("Your %s:" +
-                                "\n First name: %s" +
-                                "\n Last name: %s" +
-                                "\n Weight: %s" +
-                                "\n Height: %s", childGender, humanChild.getFirstName(), humanChild.getLastName(),
+                String resultMessage = String.format("<html><body>The data about your %s:<br>" +
+                                "First name: %s<br>Last name: %s<br>Weight: %s<br>Height: %s</body></html>",
+                        childGender, humanChild.getFirstName(), humanChild.getLastName(),
                         humanChild.getWeight(), humanChild.getHeight());
                 displayChildResultFrame(resultMessage);
             }
@@ -398,47 +364,68 @@ public class WindowService implements ITesterService {
     private void displayChildResultFrame(String resultMessage) {
         childResultFrame = new JFrame();
         childResultFrame.setVisible(true);
-        childResultFrame.setBounds(500, 200, 800, 300);
+        childResultFrame.setBounds(500, 200, 800, 400);
         childResultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         childResultFrame.getContentPane().setLayout(null);
 
         JLabel childResult = new JLabel(resultMessage);
-        childResult.setBounds(40, 40, 450, 40);
+        childResult.setBounds(40, 20, 450, 200);
+        Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+        childResult.setFont(childResultFont);
         childResultFrame.getContentPane().add(childResult);
         childResultFrame.getContentPane().add(missionButton);
+        missionButton.setBounds(40, 250, 180, 40);
         childResultFrame.getContentPane().add(closeChildResultButton);
     }
 
     private void displayChildNameFrame(String childGender) {
         childNameFrame = new JFrame();
         childNameFrame.setVisible(true);
-        childNameFrame.setBounds(500, 200, 800, 400);
+        childNameFrame.setBounds(500, 200, 800, 450);
         childNameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         childNameFrame.getContentPane().setLayout(null);
 
-        JLabel pairsInfoLabel = new JLabel("Congratulations! You are a perfect match for each other!");
-        pairsInfoLabel.setBounds(85, 40, 800, 30);
+        ImageIcon imageCongrIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\CongratulationImage.png")
+                .getImage().getScaledInstance(500, 70, Image.SCALE_DEFAULT));
+        JLabel imageCongrLabel = new JLabel(imageCongrIcon);
+        imageCongrLabel.setIcon(imageCongrIcon);
+        imageCongrLabel.setBounds(140, 10, 500, 80);
+        childNameFrame.add(imageCongrLabel);
+
+        ImageIcon imageBalloonIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\confetti.png")
+                .getImage().getScaledInstance(230, 200, Image.SCALE_DEFAULT));
+        JLabel imageBalloonLabel = new JLabel(imageBalloonIcon);
+        imageBalloonLabel.setIcon(imageBalloonIcon);
+        imageBalloonLabel.setBounds(0, 100, 230, 200);
+        childNameFrame.add(imageBalloonLabel);
+
+        JLabel pairsInfoLabel = new JLabel("You are a perfect match for each other!");
+        pairsInfoLabel.setBounds(210, 100, 800, 30);
         Font pairsInfoLabelFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         pairsInfoLabel.setFont(pairsInfoLabelFont);
-        pairsInfoLabel.setForeground(Color.RED);
+        pairsInfoLabel.setForeground(new Color(0, 0, 153));
         childNameFrame.getContentPane().add(pairsInfoLabel);
 
         JLabel childInfoLabel = new JLabel("I bet you'll have such a lovely child!");
-        childInfoLabel.setBounds(170, 80, 800, 30);
+        childInfoLabel.setBounds(210, 140, 800, 30);
         Font childInfoLabelFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         childInfoLabel.setFont(childInfoLabelFont);
-        childInfoLabel.setForeground(Color.RED);
+        childInfoLabel.setForeground(new Color(0, 0, 153));
         childNameFrame.getContentPane().add(childInfoLabel);
 
         JLabel childNameLabel = new JLabel(String.format("Enter the name for %s:", childGender));
-        childNameLabel.setBounds(170, 150, 800, 30);
-        Font childNameLabelFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+        childNameLabel.setBounds(210, 200, 800, 30);
+        Font childNameLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         childNameLabel.setFont(childNameLabelFont);
 
         childNameFrame.getContentPane().add(childNameLabel);
 
         childNameText = new JTextField();
-        childNameText.setBounds(500, 152, TEXT_WIDTH, 30);
+        childNameText.setBounds(500, 202, TEXT_WIDTH, 30);
+        Font childNameTextFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+        childNameText.setFont(childNameTextFont);
         childNameFrame.getContentPane().add(childNameText);
         childNameText.setColumns(15);
         childNameFrame.getContentPane().add(childNameOk);
@@ -452,13 +439,22 @@ public class WindowService implements ITesterService {
         failedResultFrame.getContentPane().setLayout(null);
 
         JLabel failedLabel = new JLabel("Nothing happened ...");
-        failedLabel.setBounds(220, 20, 250, 50);
-        failedLabel.setForeground(Color.RED);
+        failedLabel.setBounds(100, 50, 250, 50);
+        failedLabel.setForeground(new Color(0, 0, 128));
         Font failedLabelFont = new Font(Font.DIALOG, Font.BOLD, 26);
         failedLabel.setFont(failedLabelFont);
         failedResultFrame.getContentPane().add(failedLabel);
+        missionButton.setBounds(100, 150, 180, 40);
         failedResultFrame.getContentPane().add(missionButton);
         failedResultFrame.getContentPane().add(closeFailedButton);
+
+        ImageIcon imageMemIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\imageMem.png")
+                .getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        JLabel imageMemLabel = new JLabel(imageMemIcon);
+        imageMemLabel.setIcon(imageMemIcon);
+        imageMemLabel.setBounds(500, 30, 150, 150);
+        failedResultFrame.add(imageMemLabel);
     }
 
     private Human buildEmptyHuman(boolean gender) {
