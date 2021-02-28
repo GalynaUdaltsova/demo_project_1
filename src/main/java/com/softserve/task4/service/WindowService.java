@@ -134,7 +134,7 @@ public class WindowService implements ITesterService {
                     missionFrame.getContentPane().add(missionLabel);
                     return;
                 }
-                JLabel missionLabel = new JLabel("The son was born! Mission is execute");
+                JLabel missionLabel = new JLabel("The son was born! Mission is executed");
                 missionLabel.setBounds(80, 40, 600, 40);
                 Font missionLabelFont = new Font(Font.DIALOG, Font.BOLD, 18);
                 missionLabel.setFont(missionLabelFont);
