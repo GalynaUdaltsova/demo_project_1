@@ -1,5 +1,7 @@
 package com.softserve.task4.models;
 
+import java.util.HashMap;
+
 public class Human {
     protected boolean gender;
     protected String firstName;

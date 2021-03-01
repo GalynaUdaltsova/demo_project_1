@@ -76,7 +76,7 @@ public class WindowService implements ITesterService {
         compatibilitySubmitButton = new JButton("CHECK COMPATIBILITY");
         compatibilitySubmitButton.setBackground(new Color(255, 204, 153));
         compatibilitySubmitButton.setForeground(Color.BLACK);
-        compatibilitySubmitButton.setBounds(445, 420, 300, 40);
+        compatibilitySubmitButton.setBounds(445, 430, 300, 45);
         Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 21);
         compatibilitySubmitButton.setFont(compatibilityFont);
 
@@ -100,13 +100,13 @@ public class WindowService implements ITesterService {
         closeMissionButton.setFont(closeMissionFont);
 
         closeChildResultButton = new JButton("CLOSE");
-        closeChildResultButton.setBounds(280, 250, 160, 40);
+        closeChildResultButton.setBounds(310, 350, 160, 40);
         Font closeChildResultFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         closeChildResultButton.setFont(closeChildResultFont);
 
 
         childNameOk = new JButton("OK");
-        childNameOk.setBounds(FIRST_LABEL_X_START, 300, 200, 40);
+        childNameOk.setBounds(FIRST_LABEL_X_START, 320, 160, 40);
         Font childNameOkFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         childNameOk.setFont(childNameOkFont);
     }
@@ -171,7 +171,7 @@ public class WindowService implements ITesterService {
                     displayFailedFrame();
                     return;
                 }
-                String childGender = humanChild.getGender() ? "son" : "daughter";
+                String childGender = humanChild.getGender() ? "SON" : "DAUGHTER";
                 displayChildNameFrame(childGender);
                 addChildNameListener(humanChild, childGender);
             }
@@ -352,7 +352,7 @@ public class WindowService implements ITesterService {
                 String childName = childNameText.getText();
                 humanChild.setFirstName(childName);
                 childNameFrame.dispose();
-                String resultMessage = String.format("<html><body>The data about your %s:<br>" +
+                String resultMessage = String.format("<html><body>THE DATA ABOUT A %s:<br>" +
                                 "First name: %s<br>Last name: %s<br>Weight: %s<br>Height: %s</body></html>",
                         childGender, humanChild.getFirstName(), humanChild.getLastName(),
                         humanChild.getWeight(), humanChild.getHeight());
@@ -364,7 +364,7 @@ public class WindowService implements ITesterService {
     private void displayChildResultFrame(String resultMessage) {
         childResultFrame = new JFrame();
         childResultFrame.setVisible(true);
-        childResultFrame.setBounds(500, 200, 800, 400);
+        childResultFrame.setBounds(500, 280, 800, 500);
         childResultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         childResultFrame.getContentPane().setLayout(null);
 
@@ -373,15 +373,23 @@ public class WindowService implements ITesterService {
         Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         childResult.setFont(childResultFont);
         childResultFrame.getContentPane().add(childResult);
-        childResultFrame.getContentPane().add(missionButton);
-        missionButton.setBounds(40, 250, 180, 40);
+//        childResultFrame.getContentPane().add(missionButton);
+//        missionButton.setBounds(40, 250, 180, 40);
         childResultFrame.getContentPane().add(closeChildResultButton);
+
+        ImageIcon imageBabyIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
+                "\\src\\main\\resources\\imageBaby.png")
+                .getImage().getScaledInstance(350, 200, Image.SCALE_DEFAULT));
+        JLabel imageBabyLabel = new JLabel(imageBabyIcon);
+        imageBabyLabel.setIcon(imageBabyIcon);
+        imageBabyLabel.setBounds(400, 20, 350, 200);
+        childResultFrame.add(imageBabyLabel);
     }
 
     private void displayChildNameFrame(String childGender) {
         childNameFrame = new JFrame();
         childNameFrame.setVisible(true);
-        childNameFrame.setBounds(500, 200, 800, 450);
+        childNameFrame.setBounds(500, 290, 800, 450);
         childNameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         childNameFrame.getContentPane().setLayout(null);
 
@@ -402,28 +410,27 @@ public class WindowService implements ITesterService {
         childNameFrame.add(imageBalloonLabel);
 
         JLabel pairsInfoLabel = new JLabel("You are a perfect match for each other!");
-        pairsInfoLabel.setBounds(210, 100, 800, 30);
+        pairsInfoLabel.setBounds(210, 120, 800, 30);
         Font pairsInfoLabelFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         pairsInfoLabel.setFont(pairsInfoLabelFont);
         pairsInfoLabel.setForeground(new Color(0, 0, 153));
         childNameFrame.getContentPane().add(pairsInfoLabel);
 
         JLabel childInfoLabel = new JLabel("I bet you'll have such a lovely child!");
-        childInfoLabel.setBounds(210, 140, 800, 30);
+        childInfoLabel.setBounds(210, 160, 800, 30);
         Font childInfoLabelFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         childInfoLabel.setFont(childInfoLabelFont);
         childInfoLabel.setForeground(new Color(0, 0, 153));
         childNameFrame.getContentPane().add(childInfoLabel);
 
-        JLabel childNameLabel = new JLabel(String.format("Enter the name for %s:", childGender));
-        childNameLabel.setBounds(210, 200, 800, 30);
+        JLabel childNameLabel = new JLabel(String.format("ENTER THE NAME FOR %s:", childGender));
+        childNameLabel.setBounds(210, 250, 800, 30);
         Font childNameLabelFont = new Font(Font.DIALOG, Font.PLAIN, FONT_TEXT_FRAME);
         childNameLabel.setFont(childNameLabelFont);
-
         childNameFrame.getContentPane().add(childNameLabel);
 
         childNameText = new JTextField();
-        childNameText.setBounds(500, 202, TEXT_WIDTH, 30);
+        childNameText.setBounds(565, 252, TEXT_WIDTH, 30);
         Font childNameTextFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         childNameText.setFont(childNameTextFont);
         childNameFrame.getContentPane().add(childNameText);
@@ -434,7 +441,7 @@ public class WindowService implements ITesterService {
     private void displayFailedFrame() {
         failedResultFrame = new JFrame();
         failedResultFrame.setVisible(true);
-        failedResultFrame.setBounds(550, 200, 700, 300);
+        failedResultFrame.setBounds(550, 300, 700, 300);
         failedResultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         failedResultFrame.getContentPane().setLayout(null);
 
@@ -444,8 +451,8 @@ public class WindowService implements ITesterService {
         Font failedLabelFont = new Font(Font.DIALOG, Font.BOLD, 26);
         failedLabel.setFont(failedLabelFont);
         failedResultFrame.getContentPane().add(failedLabel);
-        missionButton.setBounds(100, 150, 180, 40);
-        failedResultFrame.getContentPane().add(missionButton);
+//        missionButton.setBounds(100, 150, 180, 40);
+//        failedResultFrame.getContentPane().add(missionButton);
         failedResultFrame.getContentPane().add(closeFailedButton);
 
         ImageIcon imageMemIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
