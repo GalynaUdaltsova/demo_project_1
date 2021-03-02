@@ -4,6 +4,7 @@ import com.softserve.task4.service.ConsoleService;
 import com.softserve.task4.service.HumanService;
 import com.softserve.task4.service.ITesterService;
 import com.softserve.task4.service.WindowService;
+//import com.softserve.task4.service.WindowService;
 
 public class Test {
     public static void main(String[] args) {

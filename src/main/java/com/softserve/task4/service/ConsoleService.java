@@ -2,12 +2,10 @@ package com.softserve.task4.service;
 
 import com.softserve.task4.models.Human;
 import com.softserve.task4.models.Man;
+import com.softserve.task4.models.MissionResponse;
 import com.softserve.task4.models.Woman;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleService implements ITesterService {
 
@@ -19,7 +17,11 @@ public class ConsoleService implements ITesterService {
 
     public void test() {
         List<Human> dataFromConsole = getDataFromConsole();
-        Human child = humanService.compatibilityTest(dataFromConsole.get(0), dataFromConsole.get(1));
+        Map<String, Object> compatibilityResult = humanService.compatibilityTest(dataFromConsole.get(0), dataFromConsole.get(1));
+        List<MissionResponse> responses = humanService.executeMansMission(dataFromConsole.get(0), dataFromConsole.get(1), compatibilityResult);
+        Human child = (Human) compatibilityResult.remove("child");
+        showLogs(compatibilityResult);
+        showManActions(responses);
         if (child == null) {
             System.out.println("Nothing is happened...");
             return;
@@ -29,9 +31,30 @@ public class ConsoleService implements ITesterService {
         System.out.println(String.format("Congratulations! We have a %s with following data: " +
                         "\nFirst name: %s, \nLast name: %s, \nHeight: %s, \nWeight: %s", childGender, childFirstName,
                 child.getLastName(), child.getHeight(), child.getWeight()));
-        Human son = humanService.executeMansMission(dataFromConsole.get(0), dataFromConsole.get(1));
-        if (son == null) {
-            System.out.println("He doesn't have a son, the mission is missed");
+        if (child.getGender()) {
+            System.out.println("The son was born, the mission is executed");
+            return;
+        }
+        System.out.println("The son was not born, the mission is failed");
+    }
+
+    private void showManActions(List<MissionResponse> responses) {
+        for (MissionResponse response : responses) {
+            System.out.println("Mission result for " + response.getHuman().getFirstName() + ":");
+            if (response.getPerformedActions().isEmpty()) {
+                System.out.println("No action executed...");
+                continue;
+            }
+            for (String action : response.getPerformedActions()) {
+                System.out.println(action);
+            }
+        }
+    }
+
+    private void showLogs(Map<String, Object> compatibilityResult) {
+        String messagePattern = "Test for %s: %s";
+        for (Map.Entry<String, Object> entry : compatibilityResult.entrySet()) {
+            System.out.println(String.format(messagePattern, entry.getKey(), entry.getValue()));
         }
     }
 

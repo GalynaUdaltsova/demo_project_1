@@ -1,6 +1,7 @@
 package com.softserve.task4.models;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Human {
     protected boolean gender;
@@ -58,15 +59,25 @@ public class Human {
         }
     }
 
-    public Human haveRelationship(Human human) {
+    public Map<String, Object> haveRelationship(Human human) {
+        Map<String, Object> resultRelationship = new HashMap<>();
+        boolean resultSpeak = this.speak(human);
+        boolean resultTolerate = this.tolerate(human);
+        boolean resultSpend = this.spendTimeTogether(human);
+        resultRelationship.put("speak", resultSpeak);
+        resultRelationship.put("tolerate", resultTolerate);
+        resultRelationship.put("spend", resultSpend);
+        resultRelationship.put("child", null);
+
         if (this.gender == human.gender) {
-            return null;
+            return resultRelationship;
         }
-        if (this.speak(human) && this.tolerate(human) && this.spendTimeTogether(human)) {
+        if (resultSpeak && resultTolerate && resultSpend) {
             Human child = this.getGender() ? ((Woman) human).giveBirthTo(this) : ((Woman) this).giveBirthTo(human);
-            return child;
+            resultRelationship.put("child", child);
+            return resultRelationship;
         }
-       return null;
+       return resultRelationship;
     }
 
     public boolean getGender() {

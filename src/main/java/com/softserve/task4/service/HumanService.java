@@ -2,21 +2,27 @@ package com.softserve.task4.service;
 
 import com.softserve.task4.models.Human;
 import com.softserve.task4.models.Man;
+import com.softserve.task4.models.MissionResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class HumanService {
 
-    public Human compatibilityTest(Human firstHuman, Human secondHuman) {
+    public Map<String, Object> compatibilityTest(Human firstHuman, Human secondHuman) {
         return firstHuman.haveRelationship(secondHuman);
     }
 
-    public Human executeMansMission(Human firstHuman, Human secondHuman) {
+    public List<MissionResponse> executeMansMission(Human firstHuman, Human secondHuman, Map<String, Object> resultMap) {
+        List<MissionResponse> responses = new ArrayList<>();
         if (firstHuman.getGender()) {
-            return ((Man) firstHuman).executeMission(secondHuman);
+            responses.add(((Man) firstHuman).executeMission(secondHuman, resultMap));
         }
         if (secondHuman.getGender()) {
-            return ((Man) secondHuman).executeMission(firstHuman);
+            responses.add(((Man) secondHuman).executeMission(firstHuman, resultMap));
         }
-        return null;
+        return responses;
 
     }
 

@@ -1,5 +1,10 @@
 package com.softserve.task4.models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Man extends Human {
 
     public Man() {
@@ -10,24 +15,23 @@ public class Man extends Human {
         super(true, firstName, lastName, height, weight);
     }
 
-    public Human executeMission(Human human) {
+    public MissionResponse executeMission(Human human, Map<String, Object> resultRelationship) {
+        boolean resultSpeak = (Boolean) resultRelationship.get("speak");
+        boolean resultSpend = (Boolean) resultRelationship.get("spend");
+        boolean resultTolerate = (Boolean) resultRelationship.get("tolerate");
+        Human child = (Human) resultRelationship.get("child");
 
-        if (this.speak(human) && this.spendTimeTogether(human) && !this.tolerate(human)) {
-            System.out.println("Build a house");
-        } else if (this.speak(human) && !this.tolerate(human)) {
-            System.out.println("Plant a tree");
-        } else {
-            if (this.getGender() && !human.getGender()) {
-                Human child = ((Woman) human).giveBirthTo(this);
-                if (child.getGender()) {
-                    System.out.println("Birth of a son");
-                } else {
-                    return child;
-                }
-            } else {
-                return null;
-            }
+        List<String> actions = new ArrayList<>();
+        if (resultSpeak && resultSpend) {
+            actions.add("The house was built");
         }
-        return null;
+        if (resultSpeak && !resultTolerate) {
+            actions.add("The tree was planted");
+        }
+        MissionResponse missionResponse = new MissionResponse(this, actions);
+        if (!human.getGender() && child.getGender()) {
+            missionResponse.setMissionResult("The son was born!  The mission is executed");
+        }
+        return missionResponse;
     }
 }

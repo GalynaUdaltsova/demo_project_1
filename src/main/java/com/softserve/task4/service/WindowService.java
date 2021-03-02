@@ -2,12 +2,15 @@ package com.softserve.task4.service;
 
 import com.softserve.task4.models.Human;
 import com.softserve.task4.models.Man;
+import com.softserve.task4.models.MissionResponse;
 import com.softserve.task4.models.Woman;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 
 public class WindowService implements ITesterService {
 
@@ -28,15 +31,17 @@ public class WindowService implements ITesterService {
     private static final int FONT_NAME_FRAME = 18;
     public static final int FONT_TEXT_FRAME = 20;
 
-    private JButton missionButton;
+    private JButton resultButton;
+//    private JButton missionButton;
     private JButton closeFailedButton;
-    private JButton closeMissionButton;
+//    private JButton closeMissionButton;
     private JButton closeChildResultButton;
     private JButton childNameOk;
     private JButton compatibilitySubmitButton;
     private JButton clearButton;
     private HumanService humanService;
     private JFrame failedResultFrame;
+    private JFrame displayProcessFrame;
     private JFrame missionFrame;
     private JFrame childNameFrame;
     private JFrame childResultFrame;
@@ -85,19 +90,24 @@ public class WindowService implements ITesterService {
         Font clearFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         clearButton.setFont(clearFont);
 
-        closeFailedButton = new JButton("CANCEL");
-        closeFailedButton.setBounds(330, 150, 130, 40);
+        closeFailedButton = new JButton("CLOSE");
+        closeFailedButton.setBounds(150, 150, 130, 40);
         Font closeFailedBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
         closeFailedButton.setFont(closeFailedBFont);
 
-        missionButton = new JButton("MALE MISSION");
-        Font missionBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
-        missionButton.setFont(missionBFont);
+//        missionButton = new JButton("MALE MISSION");
+//        Font missionBFont = new Font(Font.DIALOG, Font.PLAIN, 18);
+//        missionButton.setFont(missionBFont);
 
-        closeMissionButton = new JButton("CLOSE");
-        closeMissionButton.setBounds(100, 150, 160, 40);
-        Font closeMissionFont = new Font(Font.DIALOG, Font.PLAIN, 18);
-        closeMissionButton.setFont(closeMissionFont);
+        resultButton = new JButton("RESULT");
+        resultButton.setBounds(150, 600, 160, 40);
+        Font resultButtonFont = new Font(Font.DIALOG, Font.PLAIN, 18);
+        resultButton.setFont(resultButtonFont);
+
+//        closeMissionButton = new JButton("CLOSE");
+//        closeMissionButton.setBounds(100, 150, 160, 40);
+//        Font closeMissionFont = new Font(Font.DIALOG, Font.PLAIN, 18);
+//        closeMissionButton.setFont(closeMissionFont);
 
         closeChildResultButton = new JButton("CLOSE");
         closeChildResultButton.setBounds(310, 350, 160, 40);
@@ -112,35 +122,36 @@ public class WindowService implements ITesterService {
     }
 
     private void initializeListeners() {
-        missionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (failedResultFrame != null) {
-                    failedResultFrame.dispose();
-                } else {
-                    childResultFrame.dispose();
-                }
-                missionFrame = new JFrame();
-                missionFrame.setVisible(true);
-                missionFrame.setBounds(500, 200, 800, 300);
-                missionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                missionFrame.getContentPane().setLayout(null);
-                missionFrame.getContentPane().add(closeMissionButton);
-                Human son = humanService.executeMansMission(firstHuman, secondHuman);
-                if (son == null) {
-                    JLabel missionLabel = new JLabel("Son was not born, the mission is missed");
-                    missionLabel.setBounds(80, 40, 600, 40);
-                    Font missionLabelFont = new Font(Font.DIALOG, Font.BOLD, 18);
-                    missionLabel.setFont(missionLabelFont);
-                    missionFrame.getContentPane().add(missionLabel);
-                    return;
-                }
-                JLabel missionLabel = new JLabel("The son was born! Mission is executed");
-                missionLabel.setBounds(80, 40, 600, 40);
-                Font missionLabelFont = new Font(Font.DIALOG, Font.BOLD, 18);
-                missionLabel.setFont(missionLabelFont);
-                missionFrame.getContentPane().add(missionLabel);
-            }
-        });
+//        missionButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                if (failedResultFrame != null) {
+//                    failedResultFrame.dispose();
+//                } else {
+//                    childResultFrame.dispose();
+//                }
+//                missionFrame = new JFrame();
+//                missionFrame.setVisible(true);
+//                missionFrame.setBounds(500, 200, 800, 300);
+//                missionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                missionFrame.getContentPane().setLayout(null);
+//                missionFrame.getContentPane().add(closeMissionButton);
+////                Human son = humanService.executeMansMission(firstHuman, secondHuman);
+//                Human son = null;
+//                if (son == null) {
+//                    JLabel missionLabel = new JLabel("Son was not born, the mission is missed");
+//                    missionLabel.setBounds(80, 40, 600, 40);
+//                    Font missionLabelFont = new Font(Font.DIALOG, Font.BOLD, 18);
+//                    missionLabel.setFont(missionLabelFont);
+//                    missionFrame.getContentPane().add(missionLabel);
+//                    return;
+//                }
+//                JLabel missionLabel = new JLabel("The son was born! Mission is executed");
+//                missionLabel.setBounds(80, 40, 600, 40);
+//                Font missionLabelFont = new Font(Font.DIALOG, Font.BOLD, 18);
+//                missionLabel.setFont(missionLabelFont);
+//                missionFrame.getContentPane().add(missionLabel);
+//            }
+//        });
 
         compatibilitySubmitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -166,9 +177,10 @@ public class WindowService implements ITesterService {
                 secondHuman.setHeight(Float.parseFloat(heightStringSecond));
                 secondHuman.setWeight(Float.parseFloat(weighStringSecond));
 
-                Human humanChild = humanService.compatibilityTest(firstHuman, secondHuman);
+                Map<String, Object> compatibilityResult = humanService.compatibilityTest(firstHuman, secondHuman);
+                Human humanChild = (Human) compatibilityResult.remove("child");
+                displayProcessFrame(compatibilityResult);
                 if (humanChild == null) {
-                    displayFailedFrame();
                     return;
                 }
                 String childGender = humanChild.getGender() ? "SON" : "DAUGHTER";
@@ -183,15 +195,23 @@ public class WindowService implements ITesterService {
             }
         });
 
-        closeMissionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                missionFrame.dispose();
-            }
-        });
+//        closeMissionButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                missionFrame.dispose();
+//            }
+//        });
 
         closeChildResultButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 childResultFrame.dispose();
+            }
+        });
+
+        resultButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayProcessFrame.dispose();
+                displayFailedFrame();
+
             }
         });
 
@@ -209,6 +229,8 @@ public class WindowService implements ITesterService {
                 genderSecond.setSelectedItem(FEMALE);
             }
         });
+
+
     }
 
     private void initializeFrame() {
@@ -373,8 +395,6 @@ public class WindowService implements ITesterService {
         Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         childResult.setFont(childResultFont);
         childResultFrame.getContentPane().add(childResult);
-//        childResultFrame.getContentPane().add(missionButton);
-//        missionButton.setBounds(40, 250, 180, 40);
         childResultFrame.getContentPane().add(closeChildResultButton);
 
         ImageIcon imageBabyIcon = new ImageIcon(new ImageIcon("B:\\javaStudy\\demo_project_1" +
@@ -438,6 +458,47 @@ public class WindowService implements ITesterService {
         childNameFrame.getContentPane().add(childNameOk);
     }
 
+    private void displayProcessFrame(Map<String, Object> compatibilityResult) {
+        displayProcessFrame = new JFrame();
+        displayProcessFrame.setVisible(true);
+        displayProcessFrame.setBounds(550, 100, 700, 800);
+        displayProcessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        displayProcessFrame.getContentPane().setLayout(null);
+        displayProcessFrame.getContentPane().add(resultButton);
+        String messagePattern = "Test for %s: %s<br>";
+        StringBuilder message = new StringBuilder("<html><body>");
+        for (Map.Entry<String, Object> entry : compatibilityResult.entrySet()) {
+            message.append(String.format(messagePattern, entry.getKey(), entry.getValue()));
+        }
+        message.append("</body></html>");
+
+        JLabel processResult = new JLabel(message.toString());
+        processResult.setBounds(40, 20, 450, 300);
+        Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+        processResult.setFont(childResultFont);
+        displayProcessFrame.add(processResult);
+
+        List<MissionResponse> responses = humanService.executeMansMission(firstHuman, secondHuman, compatibilityResult);
+        StringBuilder actions = new StringBuilder("<html><body>");
+        for (MissionResponse response : responses) {
+            actions.append("Mission result for ").append(response.getHuman().getFirstName()).append(":<br>");
+            if (response.getPerformedActions().isEmpty()) {
+                actions.append("No action executed...<br>");
+                continue;
+            }
+            for (String action : response.getPerformedActions()) {
+                actions.append(action).append("<br>");
+            }
+        }
+        actions.append("<html><body>");
+        JLabel actionsResult = new JLabel(actions.toString());
+        actionsResult.setBounds(40, 300, 450, 300);
+//        Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
+        actionsResult.setFont(childResultFont);
+        displayProcessFrame.add(actionsResult);
+
+    }
+
     private void displayFailedFrame() {
         failedResultFrame = new JFrame();
         failedResultFrame.setVisible(true);
@@ -460,7 +521,7 @@ public class WindowService implements ITesterService {
                 .getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
         JLabel imageMemLabel = new JLabel(imageMemIcon);
         imageMemLabel.setIcon(imageMemIcon);
-        imageMemLabel.setBounds(500, 30, 150, 150);
+        imageMemLabel.setBounds(450, 30, 150, 150);
         failedResultFrame.add(imageMemLabel);
     }
 
