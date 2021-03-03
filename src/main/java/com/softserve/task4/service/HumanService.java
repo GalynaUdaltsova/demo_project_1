@@ -7,7 +7,6 @@ import com.softserve.task4.models.RelationResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HumanService {
 
@@ -24,7 +23,5 @@ public class HumanService {
             responses.add(((Man) secondHuman).executeMission(firstHuman, relationResponse));
         }
         return responses;
-
     }
-
 }

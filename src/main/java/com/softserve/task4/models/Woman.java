@@ -11,7 +11,8 @@ public class Woman extends Human {
     }
 
     public Human giveBirthTo(Human human) {
-        System.out.println("You are a perfect match for each other! I bet you'll have such a lovely child! \n" + getFullName(this)  + " is giving birth to a child...");
+        System.out.println("You are a perfect match for each other! I bet you'll have such a lovely " +
+                "child! \n" + getFullName(this)  + " is giving birth to a child...");
         boolean isBoy = Math.random() <= 0.5;
         String firstName = "NoName";
         String lastName = human.getLastName();
@@ -27,6 +28,5 @@ public class Woman extends Human {
             return new Woman(firstName, lastName, height, weight);
         }
     }
-
 }
 

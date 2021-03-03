@@ -2,7 +2,6 @@ package com.softserve.task4.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Man extends Human {
 

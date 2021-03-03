@@ -10,13 +10,13 @@ import java.util.List;
 
 public class WindowService implements ITesterService {
 
-    public static final String MALE = "Male";
-    public static final String FEMALE = "Female";
-    public static final String WEIGHT = "Weight";
-    public static final String HEIGHT = "Height";
-    public static final String LAST_NAME = "Last Name";
-    public static final String FIRST_NAME = "First Name";
-    public static final String GENDER = "Gender";
+    private static final String MALE = "Male";
+    private static final String FEMALE = "Female";
+    private static final String WEIGHT = "Weight";
+    private static final String HEIGHT = "Height";
+    private static final String LAST_NAME = "Last Name";
+    private static final String FIRST_NAME = "First Name";
+    private static final String GENDER = "Gender";
     private static final int FIRST_LABEL_X_START = 310;
     private static final int SECOND_LABEL_X_START = 550;
     private static final int FIRST_TEXT_X_START = 320;
@@ -90,7 +90,7 @@ public class WindowService implements ITesterService {
         clearButton.setFont(clearFont);
 
         closeFailedButton = new JButton("CLOSE");
-        closeFailedButton.setBounds(275, 180, WIDTH_BUTTON - 30, HEIGHT_BUTTON);
+        closeFailedButton.setBounds(270, 180, WIDTH_BUTTON - 30, HEIGHT_BUTTON);
         Font closeFailedBFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         closeFailedButton.setFocusable(false);
         closeFailedButton.setFont(closeFailedBFont);
@@ -509,7 +509,7 @@ public class WindowService implements ITesterService {
     private void displayFailedCompatibilityFrame() {
         failedResultFrame = new JFrame();
         failedResultFrame.setVisible(true);
-        failedResultFrame.setBounds(550, 300, 700, 320);
+        failedResultFrame.setBounds(560, 300, 700, 320);
         failedResultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         failedResultFrame.getContentPane().setLayout(null);
 

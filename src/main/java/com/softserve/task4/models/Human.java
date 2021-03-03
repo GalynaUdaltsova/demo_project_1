@@ -22,7 +22,6 @@ public class Human {
         this.weight = weight;
     }
 
-
     public boolean speak(Human human) {
         if (!this.getGender() && !human.getGender()) {
             return true;
