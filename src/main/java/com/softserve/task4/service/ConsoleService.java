@@ -1,9 +1,6 @@
 package com.softserve.task4.service;
 
-import com.softserve.task4.models.Human;
-import com.softserve.task4.models.Man;
-import com.softserve.task4.models.MissionResponse;
-import com.softserve.task4.models.Woman;
+import com.softserve.task4.models.*;
 
 import java.util.*;
 
@@ -17,10 +14,11 @@ public class ConsoleService implements ITesterService {
 
     public void test() {
         List<Human> dataFromConsole = getDataFromConsole();
-        Map<String, Object> compatibilityResult = humanService.compatibilityTest(dataFromConsole.get(0), dataFromConsole.get(1));
-        List<MissionResponse> responses = humanService.executeMansMission(dataFromConsole.get(0), dataFromConsole.get(1), compatibilityResult);
-        Human child = (Human) compatibilityResult.remove("child");
-        showLogs(compatibilityResult);
+        RelationResponse relationResponse = humanService.compatibilityTest(dataFromConsole.get(0), dataFromConsole.get(1));
+        List<MissionResponse> responses = humanService.executeMansMission(dataFromConsole.get(0), dataFromConsole.get(1),
+                relationResponse);
+        Human child = relationResponse.getChild();
+        showLogs(relationResponse);
         showManActions(responses);
         if (child == null) {
             System.out.println("Nothing is happened...");
@@ -51,11 +49,17 @@ public class ConsoleService implements ITesterService {
         }
     }
 
-    private void showLogs(Map<String, Object> compatibilityResult) {
-        String messagePattern = "Test for %s: %s";
-        for (Map.Entry<String, Object> entry : compatibilityResult.entrySet()) {
-            System.out.println(String.format(messagePattern, entry.getKey(), entry.getValue()));
+    private void showLogs(RelationResponse relationResponse) {
+        try {
+            System.out.println(relationResponse.getSpeakResultMessage());
+            Thread.sleep(2000);
+            System.out.println(relationResponse.getTolerateResultMessage());
+            Thread.sleep(2000);
+            System.out.println(relationResponse.getSpendResultMessage());
+        } catch (InterruptedException ex) {
+            System.out.println("The error occurred while logs writing");
         }
+
     }
 
     private List<Human> getDataFromConsole() {

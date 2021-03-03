@@ -59,25 +59,22 @@ public class Human {
         }
     }
 
-    public Map<String, Object> haveRelationship(Human human) {
+    public RelationResponse haveRelationship(Human human) {
         Map<String, Object> resultRelationship = new HashMap<>();
         boolean resultSpeak = this.speak(human);
         boolean resultTolerate = this.tolerate(human);
         boolean resultSpend = this.spendTimeTogether(human);
-        resultRelationship.put("speak", resultSpeak);
-        resultRelationship.put("tolerate", resultTolerate);
-        resultRelationship.put("spend", resultSpend);
-        resultRelationship.put("child", null);
+        RelationResponse relationResponse = new RelationResponse(resultSpeak, resultTolerate, resultSpend, null);
 
         if (this.gender == human.gender) {
-            return resultRelationship;
+            return relationResponse;
         }
         if (resultSpeak && resultTolerate && resultSpend) {
             Human child = this.getGender() ? ((Woman) human).giveBirthTo(this) : ((Woman) this).giveBirthTo(human);
-            resultRelationship.put("child", child);
-            return resultRelationship;
+            relationResponse.setChild(child);
+            return relationResponse;
         }
-       return resultRelationship;
+       return relationResponse;
     }
 
     public boolean getGender() {

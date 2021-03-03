@@ -1,18 +1,12 @@
 package com.softserve.task4.service;
 
-import com.softserve.task4.models.Human;
-import com.softserve.task4.models.Man;
-import com.softserve.task4.models.MissionResponse;
-import com.softserve.task4.models.Woman;
+import com.softserve.task4.models.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class WindowService implements ITesterService {
 
@@ -96,19 +90,19 @@ public class WindowService implements ITesterService {
         clearButton.setFont(clearFont);
 
         closeFailedButton = new JButton("CLOSE");
-        closeFailedButton.setBounds(150, 150, WIDTH_BUTTON -30, HEIGHT_BUTTON);
+        closeFailedButton.setBounds(275, 180, WIDTH_BUTTON - 30, HEIGHT_BUTTON);
         Font closeFailedBFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         closeFailedButton.setFocusable(false);
         closeFailedButton.setFont(closeFailedBFont);
 
         resultButton = new JButton("RESULT");
-        resultButton.setBounds(FIRST_LABEL_X_START, 380, WIDTH_BUTTON, HEIGHT_BUTTON);
+        resultButton.setBounds(FIRST_LABEL_X_START, 450, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font resultButtonFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         resultButton.setFocusable(false);
         resultButton.setFont(resultButtonFont);
 
         failedResultButton = new JButton("RESULT");
-        failedResultButton.setBounds(FIRST_LABEL_X_START, 380, WIDTH_BUTTON, HEIGHT_BUTTON);
+        failedResultButton.setBounds(FIRST_LABEL_X_START, 450, WIDTH_BUTTON, HEIGHT_BUTTON);
         failedResultButton.setFocusable(false);
         failedResultButton.setFont(resultButtonFont);
 
@@ -150,14 +144,14 @@ public class WindowService implements ITesterService {
                 secondHuman.setHeight(Float.parseFloat(heightStringSecond));
                 secondHuman.setWeight(Float.parseFloat(weighStringSecond));
 
-                Map<String, Object> compatibilityResult = humanService.compatibilityTest(firstHuman, secondHuman);
-                Human child = (Human) compatibilityResult.get("child");
+                RelationResponse relationResponse = humanService.compatibilityTest(firstHuman, secondHuman);
+                Human child = relationResponse.getChild();
                 if (child == null) {
-                    displayFailedProcesses(compatibilityResult);
+                    displayFailedProcesses(relationResponse);
                     return;
                 }
                 initializeResultButton(child);
-                displayResultProcesses(compatibilityResult);
+                displayResultProcesses(relationResponse);
             }
         });
 
@@ -196,43 +190,43 @@ public class WindowService implements ITesterService {
         });
     }
 
-    private void displayResultProcesses(Map<String, Object> compatibilityResult) {
+    private void displayResultProcesses(RelationResponse relationResponse) {
         displayProcessFrame = new JFrame();
         displayProcessFrame.setVisible(true);
-        displayProcessFrame.setBounds(500, 290, 800, 500);
+        displayProcessFrame.setBounds(500, 230, 800, 550);
         displayProcessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         displayProcessFrame.getContentPane().setLayout(null);
 
         JLabel processLabel = new JLabel("Activities process...");
-        processLabel.setBounds(FIRST_LABEL_X_START, 10, 250, 50);
+        processLabel.setBounds(FIRST_LABEL_X_START - 50, 20, 250, 50);
         processLabel.setForeground(new Color(0, 0, 128));
         Font processLabelFont = new Font(Font.DIALOG, Font.BOLD, 26);
         processLabel.setFont(processLabelFont);
         displayProcessFrame.getContentPane().add(processLabel);
 
         displayProcessFrame.getContentPane().add(resultButton);
-        displayProcessFrame.add(getProcessesMessage(compatibilityResult));
-        List<MissionResponse> responses = humanService.executeMansMission(firstHuman, secondHuman, compatibilityResult);
+        displayProcessFrame.add(getProcessesMessage(relationResponse));
+        List<MissionResponse> responses = humanService.executeMansMission(firstHuman, secondHuman, relationResponse);
         displayProcessFrame.getContentPane().add(getMissionMessage(responses));
     }
 
-    private void displayFailedProcesses(Map<String, Object> compatibilityResult) {
+    private void displayFailedProcesses(RelationResponse relationResponse) {
         failedProcessFrame = new JFrame();
         failedProcessFrame.setVisible(true);
-        failedProcessFrame.setBounds(500, 290, 800, 500);
+        failedProcessFrame.setBounds(500, 230, 800, 550);
         failedProcessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         failedProcessFrame.getContentPane().setLayout(null);
 
-        JLabel processFailedLabel = new JLabel("Activities");
-        processFailedLabel.setBounds(FIRST_LABEL_X_START, 10, 250, 50);
+        JLabel processFailedLabel = new JLabel("Activities process...");
+        processFailedLabel.setBounds(FIRST_LABEL_X_START - 50, 20, 250, 50);
         processFailedLabel.setForeground(new Color(0, 0, 128));
         Font processFailedLabelFont = new Font(Font.DIALOG, Font.BOLD, 26);
         processFailedLabel.setFont(processFailedLabelFont);
         failedProcessFrame.getContentPane().add(processFailedLabel);
 
         failedProcessFrame.getContentPane().add(failedResultButton);
-        failedProcessFrame.add(getProcessesMessage(compatibilityResult));
-        List<MissionResponse> responses = humanService.executeMansMission(firstHuman, secondHuman, compatibilityResult);
+        failedProcessFrame.add(getProcessesMessage(relationResponse));
+        List<MissionResponse> responses = humanService.executeMansMission(firstHuman, secondHuman, relationResponse);
         failedProcessFrame.getContentPane().add(getMissionMessage(responses));
     }
 
@@ -410,14 +404,16 @@ public class WindowService implements ITesterService {
         childResultFrame.getContentPane().add(closeChildResultButton);
 
         if (child.getGender()) {
-            JLabel missionResult = new JLabel("THE SON WAS BORN, THE MAN'S MISSION IS EXECUTED!");
+            JLabel missionResult = new JLabel("<html><body>THE SON WAS BORN!<br/>" +
+                    "THE MAN'S MISSION IS EXECUTED!</html></body>");
             missionResult.setBounds(40, 180, 800, 200);
             Font missionResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
             missionResult.setFont(missionResultFont);
             missionResult.setForeground(new Color(0, 0, 153));
             childResultFrame.getContentPane().add(missionResult);
         } else {
-            JLabel missionResult = new JLabel("THE SON WAS NOT BORN, THE MAN'S MISSION IS NOT EXECUTED!");
+            JLabel missionResult = new JLabel("<html><body>THE SON WAS NOT BORN...<br/>" +
+                    "THE MAN'S MISSION IS NOT EXECUTED...</html></body>");
             missionResult.setBounds(40, 180, 800, 200);
             Font missionResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
             missionResult.setFont(missionResultFont);
@@ -479,7 +475,7 @@ public class WindowService implements ITesterService {
     private JLabel getMissionMessage(List<MissionResponse> responses) {
         StringBuilder actions = new StringBuilder("<html><body>");
         for (MissionResponse response : responses) {
-            actions.append("Mission result for ").append(response.getHuman().getFirstName()).append(":<br>");
+            actions.append("<br>").append("Mission result for ").append(response.getHuman().getFirstName()).append(":<br>");
             if (response.getPerformedActions().isEmpty()) {
                 actions.append("The mission is not executed...<br>");
                 continue;
@@ -490,27 +486,21 @@ public class WindowService implements ITesterService {
         }
         actions.append("<html><body>");
         JLabel missionResultLabel = new JLabel(actions.toString());
-        missionResultLabel.setBounds(200, 190, 500, 180);
+        missionResultLabel.setBounds(260, 190, 500, 180);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         missionResultLabel.setFont(font);
         return missionResultLabel;
     }
 
-    private JLabel getProcessesMessage(Map<String, Object> compatibilityResult) {
-
-        String messagePattern = "Test for %s: %s<br>";
+    private JLabel getProcessesMessage(RelationResponse relationResponse) {
         StringBuilder message = new StringBuilder("<html><body>");
-        Set<Map.Entry<String, Object>> entries = compatibilityResult.entrySet()
-                .stream()
-                .filter(e -> !"child".equalsIgnoreCase(e.getKey()))
-                .collect(Collectors.toSet());
-        for (Map.Entry<String, Object> entry : entries) {
-            message.append(String.format(messagePattern, entry.getKey(), entry.getValue()));
-        }
+        message.append(relationResponse.getSpeakResultMessage()).append("<br>")
+                .append(relationResponse.getTolerateResultMessage()).append("<br>")
+                .append(relationResponse.getSpendResultMessage());
         message.append("</body></html>");
 
         JLabel processResult = new JLabel(message.toString());
-        processResult.setBounds(200, 70, 500, 80);
+        processResult.setBounds(260, 100, 500, 80);
         Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         processResult.setFont(childResultFont);
         return processResult;
@@ -519,7 +509,7 @@ public class WindowService implements ITesterService {
     private void displayFailedCompatibilityFrame() {
         failedResultFrame = new JFrame();
         failedResultFrame.setVisible(true);
-        failedResultFrame.setBounds(550, 300, 700, 300);
+        failedResultFrame.setBounds(550, 300, 700, 320);
         failedResultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         failedResultFrame.getContentPane().setLayout(null);
 
