@@ -29,7 +29,7 @@ public class Man extends Human {
             actions.add("The tree was planted");
         }
         MissionResponse missionResponse = new MissionResponse(this, actions);
-        if (!human.getGender() && child.getGender()) {
+        if (!human.getGender() && child!= null && child.getGender()) {
             missionResponse.setMissionResult("The son was born!  The mission is executed");
         }
         return missionResponse;
