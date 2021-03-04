@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
 public class WindowService implements ITesterService {
@@ -82,41 +83,53 @@ public class WindowService implements ITesterService {
         Font compatibilityFont = new Font(Font.DIALOG, Font.PLAIN, 21);
         compatibilitySubmitButton.setFocusable(false);
         compatibilitySubmitButton.setFont(compatibilityFont);
+        compatibilitySubmitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         clearButton = new JButton("CLEAR");
         clearButton.setBounds(515, 550, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font clearFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         clearButton.setFocusable(false);
         clearButton.setFont(clearFont);
+        clearButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         closeFailedButton = new JButton("CLOSE");
         closeFailedButton.setBounds(270, 180, WIDTH_BUTTON - 30, HEIGHT_BUTTON);
         Font closeFailedBFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         closeFailedButton.setFocusable(false);
         closeFailedButton.setFont(closeFailedBFont);
+        closeFailedButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
 
         resultButton = new JButton("RESULT");
         resultButton.setBounds(FIRST_LABEL_X_START, 450, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font resultButtonFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         resultButton.setFocusable(false);
         resultButton.setFont(resultButtonFont);
+        resultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
 
         failedResultButton = new JButton("RESULT");
         failedResultButton.setBounds(FIRST_LABEL_X_START, 450, WIDTH_BUTTON, HEIGHT_BUTTON);
         failedResultButton.setFocusable(false);
         failedResultButton.setFont(resultButtonFont);
+        resultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
 
         closeChildResultButton = new JButton("CLOSE");
         closeChildResultButton.setBounds(FIRST_LABEL_X_START, 350, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font closeChildResultFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         closeChildResultButton.setFocusable(false);
         closeChildResultButton.setFont(closeChildResultFont);
+        closeChildResultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
 
         childNameOk = new JButton("OK");
         childNameOk.setBounds(FIRST_LABEL_X_START, 320, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font childNameOkFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         childNameOk.setFocusable(false);
         childNameOk.setFont(childNameOkFont);
+        childNameOk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
     }
 
     private void initializeListeners() {
@@ -238,29 +251,14 @@ public class WindowService implements ITesterService {
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(10, 35, 300, 400);
+            imageManLabel.setBounds(150, 35, 300, 400);
             displayProcessFrame.add(imageManLabel);
         } else {
             ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!speak.png")
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(10, 35, 300, 400);
-            displayProcessFrame.add(imageManLabel);
-        }
-        if (relationResponse.isSpendResult()) {
-            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/spend.png")
-                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JLabel imageManLabel = new JLabel(imageManIcon);
-            imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(300, 35, 300, 400);
-            displayProcessFrame.add(imageManLabel);
-        } else {
-            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!spend.png")
-                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JLabel imageManLabel = new JLabel(imageManIcon);
-            imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(300, 35, 300, 400);
+            imageManLabel.setBounds(150, 35, 300, 400);
             displayProcessFrame.add(imageManLabel);
         }
         if (relationResponse.isTolerateResult()) {
@@ -268,16 +266,32 @@ public class WindowService implements ITesterService {
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(400, 35, 300, 400);
+            imageManLabel.setBounds(260, 35, 300, 400);
             displayProcessFrame.add(imageManLabel);
         } else {
             ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!tolerate.png")
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(400, 35, 300, 400);
+            imageManLabel.setBounds(260, 35, 300, 400);
             displayProcessFrame.add(imageManLabel);
         }
+        if (relationResponse.isSpendResult()) {
+            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/spend.png")
+                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JLabel imageManLabel = new JLabel(imageManIcon);
+            imageManLabel.setIcon(imageManIcon);
+            imageManLabel.setBounds(370, 35, 300, 400);
+            displayProcessFrame.add(imageManLabel);
+        } else {
+            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!spend.png")
+                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JLabel imageManLabel = new JLabel(imageManIcon);
+            imageManLabel.setIcon(imageManIcon);
+            imageManLabel.setBounds(370, 35, 300, 400);
+            displayProcessFrame.add(imageManLabel);
+        }
+
     }
     void showImagesFailed(RelationResponse relationResponse) {
         if (relationResponse.isSpeakResult()) {
@@ -285,29 +299,14 @@ public class WindowService implements ITesterService {
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(10, 35, 300, 400);
+            imageManLabel.setBounds(150, 35, 300, 400);
             failedProcessFrame.add(imageManLabel);
         } else {
             ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!speak.png")
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(10, 35, 300, 400);
-            failedProcessFrame.add(imageManLabel);
-        }
-        if (relationResponse.isSpendResult()) {
-            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/spend.png")
-                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JLabel imageManLabel = new JLabel(imageManIcon);
-            imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(300, 35, 300, 400);
-            failedProcessFrame.add(imageManLabel);
-        } else {
-            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!spend.png")
-                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            JLabel imageManLabel = new JLabel(imageManIcon);
-            imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(300, 35, 300, 400);
+            imageManLabel.setBounds(150, 35, 300, 400);
             failedProcessFrame.add(imageManLabel);
         }
         if (relationResponse.isTolerateResult()) {
@@ -315,16 +314,32 @@ public class WindowService implements ITesterService {
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(400, 35, 300, 400);
+            imageManLabel.setBounds(260, 35, 300, 400);
             failedProcessFrame.add(imageManLabel);
         } else {
             ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!tolerate.png")
                     .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             JLabel imageManLabel = new JLabel(imageManIcon);
             imageManLabel.setIcon(imageManIcon);
-            imageManLabel.setBounds(400, 35, 300, 400);
+            imageManLabel.setBounds(260, 35, 300, 400);
             failedProcessFrame.add(imageManLabel);
         }
+        if (relationResponse.isSpendResult()) {
+            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/spend.png")
+                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JLabel imageManLabel = new JLabel(imageManIcon);
+            imageManLabel.setIcon(imageManIcon);
+            imageManLabel.setBounds(370, 35, 300, 400);
+            failedProcessFrame.add(imageManLabel);
+        } else {
+            ImageIcon imageManIcon = new ImageIcon(new ImageIcon("src/main/resources/!spend.png")
+                    .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            JLabel imageManLabel = new JLabel(imageManIcon);
+            imageManLabel.setIcon(imageManIcon);
+            imageManLabel.setBounds(370, 35, 300, 400);
+            failedProcessFrame.add(imageManLabel);
+        }
+
     }
 
     private void initializeResultButton(final Human child) {
@@ -512,9 +527,9 @@ public class WindowService implements ITesterService {
             JLabel missionResult = new JLabel("<html><body>THE SON WAS NOT BORN...<br/>" +
                     "THE MAN'S MISSION IS NOT EXECUTED...</html></body>");
             missionResult.setBounds(40, 180, 800, 200);
-            Font missionResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
+            Font missionResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 15);
             missionResult.setFont(missionResultFont);
-            missionResult.setForeground(new Color(0, 0, 153));
+            missionResult.setForeground(new Color(129, 129, 129));
             childResultFrame.getContentPane().add(missionResult);
         }
         ImageIcon imageBabyIcon = new ImageIcon(new ImageIcon("src/main/resources/imageBaby.png")
