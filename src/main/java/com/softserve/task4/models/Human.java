@@ -1,14 +1,11 @@
 package com.softserve.task4.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Human {
-    protected boolean gender;
-    protected String firstName;
-    protected String lastName;
-    protected float height;
-    protected float weight;
+    private boolean gender;
+    private String firstName;
+    private String lastName;
+    private float height;
+    private float weight;
 
     public Human(boolean gender) {
         this.gender = gender;
@@ -22,7 +19,7 @@ public class Human {
         this.weight = weight;
     }
 
-    public boolean speak(Human human) {
+    private boolean speak(Human human) {
         if (!this.getGender() && !human.getGender()) {
             return true;
         } else if (!this.getGender() && human.getGender()) {
@@ -34,7 +31,7 @@ public class Human {
         }
     }
 
-    protected boolean tolerate(Human human) {
+    private boolean tolerate(Human human) {
         if (this.gender && human.gender) {
             //if both male
             return Math.random() <= 0.056;
@@ -46,11 +43,11 @@ public class Human {
         }
     }
 
-    protected float percentDifference(float n1, float n2) {
+    private float percentDifference(float n1, float n2) {
         return ((n1 - n2) / ((n1 + n2) / 2)) * 100;
     }
 
-    protected boolean spendTimeTogether(Human human) {
+    private boolean spendTimeTogether(Human human) {
         if ((percentDifference(this.getHeight(), human.getHeight())) > 10) {
             return Math.random() <= 0.95;
         } else {
@@ -59,7 +56,6 @@ public class Human {
     }
 
     public RelationResponse haveRelationship(Human human) {
-        Map<String, Object> resultRelationship = new HashMap<>();
         boolean resultSpeak = this.speak(human);
         boolean resultTolerate = this.tolerate(human);
         boolean resultSpend = this.spendTimeTogether(human);
