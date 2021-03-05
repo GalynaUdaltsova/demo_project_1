@@ -11,15 +11,22 @@ public class Test {
     public static void main(String[] args) {
         HumanService humanService = new HumanService();
 
-        System.out.println("Choose how to open the app: window or console");
-        Scanner scanner = new Scanner(System.in);
-        String data = scanner.next();
-        if (data.equalsIgnoreCase("window")) {
-            ITesterService tester = new WindowService(humanService);
-            tester.test();
-        } else {
-            ITesterService tester = new ConsoleService(humanService);
-            tester.test();
+        System.out.println("Choose how to open the app:\n1 - window\n2 - console");
+        while (true){
+            Scanner scanner = new Scanner(System.in);
+            String data = scanner.next();
+            switch (data) {
+                case "1":
+                    ITesterService windowTester = new WindowService(humanService);
+                    windowTester.test();
+                    break;
+                case "2":
+                    ITesterService consoleTester = new ConsoleService(humanService);
+                    consoleTester.test();
+                    break;
+                default:
+                    System.out.println("Choose how to open the app:\n1 - window\n2 - console");
+            }
         }
     }
 }
