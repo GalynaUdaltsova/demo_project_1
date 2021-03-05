@@ -5,7 +5,6 @@ import com.softserve.task4.service.HumanService;
 import com.softserve.task4.service.ITesterService;
 import com.softserve.task4.service.WindowService;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Test {
