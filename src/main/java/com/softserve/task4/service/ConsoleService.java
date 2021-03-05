@@ -2,7 +2,9 @@ package com.softserve.task4.service;
 
 import com.softserve.task4.models.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ConsoleService implements ITesterService {
 
@@ -59,7 +61,6 @@ public class ConsoleService implements ITesterService {
         } catch (InterruptedException ex) {
             System.out.println("The error occurred while logs writing");
         }
-
     }
 
     private List<Human> getDataFromConsole() {

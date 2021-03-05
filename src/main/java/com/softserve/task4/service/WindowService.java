@@ -101,7 +101,7 @@ public class WindowService implements ITesterService {
 
 
         resultButton = new JButton("RESULT");
-        resultButton.setBounds(FIRST_LABEL_X_START, 580, WIDTH_BUTTON, HEIGHT_BUTTON); //y:450
+        resultButton.setBounds(FIRST_LABEL_X_START, 620, WIDTH_BUTTON, HEIGHT_BUTTON);
         Font resultButtonFont = new Font(Font.DIALOG, Font.PLAIN, FONT_18);
         resultButton.setFocusable(false);
         resultButton.setFont(resultButtonFont);
@@ -109,7 +109,7 @@ public class WindowService implements ITesterService {
 
 
         failedResultButton = new JButton("RESULT");
-        failedResultButton.setBounds(FIRST_LABEL_X_START, 580, WIDTH_BUTTON, HEIGHT_BUTTON); //y: 450
+        failedResultButton.setBounds(FIRST_LABEL_X_START, 620, WIDTH_BUTTON, HEIGHT_BUTTON);
         failedResultButton.setFocusable(false);
         failedResultButton.setFont(resultButtonFont);
         resultButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -206,7 +206,7 @@ public class WindowService implements ITesterService {
     private void displayResultProcesses(RelationResponse relationResponse) {
         displayProcessFrame = new JFrame();
         displayProcessFrame.setVisible(true);
-        displayProcessFrame.setBounds(500, 130, 800, 650); //550
+        displayProcessFrame.setBounds(500, 130, 800, 750);
         displayProcessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         displayProcessFrame.getContentPane().setLayout(null);
 
@@ -229,7 +229,7 @@ public class WindowService implements ITesterService {
     private void displayFailedProcesses(RelationResponse relationResponse) {
         failedProcessFrame = new JFrame();
         failedProcessFrame.setVisible(true);
-        failedProcessFrame.setBounds(500, 130, 800, 650); //y:230 h:550
+        failedProcessFrame.setBounds(500, 130, 800, 750);
         failedProcessFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         failedProcessFrame.getContentPane().setLayout(null);
 
@@ -343,16 +343,12 @@ public class WindowService implements ITesterService {
             imageManLabel.setBounds(370, 20, 300, 400);
             failedProcessFrame.add(imageManLabel);
         }
-
     }
 
-    /*Images for missions*/
-    //Also images looks bad when man + man is chosen and text overlaps :(
-    //Images and text positioning for successful window and failed window slightly different
     void imgMission(List<MissionResponse> responses) {
         for (MissionResponse response : responses) {
             for (String action : response.getPerformedActions()) {
-                if(response.getPerformedActions() == null)  {  //not working,  different value for "if" needed
+                if(response.getPerformedActions() == null)  {
                     ImageIcon imgNothing = new ImageIcon(new ImageIcon("src/main/resources/Nothing.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                     JLabel imgNothingLabel = new JLabel(imgNothing);
@@ -383,7 +379,7 @@ public class WindowService implements ITesterService {
     void imgMissionFailed(List<MissionResponse> responses) {
         for (MissionResponse response : responses) {
             for (String action : response.getPerformedActions()) {
-                if(response.getPerformedActions() == null) { //not working,  different value for "if" needed
+                if(response.getPerformedActions() == null) {
                     ImageIcon imgNothing = new ImageIcon(new ImageIcon("src/main/resources/Nothing.png")
                             .getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                     JLabel imgNothingLabel = new JLabel(imgNothing);
@@ -410,8 +406,6 @@ public class WindowService implements ITesterService {
             }
         }
     }
-    /**/
-
 
     private void initializeResultButton(final Human child) {
         resultButton.addActionListener(new ActionListener() {
@@ -658,7 +652,8 @@ public class WindowService implements ITesterService {
     private JLabel getMissionMessage(List<MissionResponse> responses) {
         StringBuilder actions = new StringBuilder("<html><body>");
         for (MissionResponse response : responses) {
-            actions.append("<p color='#336d6f' font-size='18px'>").append("Mission result for <i>").append(response.getHuman().getFirstName()).append("</i>:</p>");
+            actions.append("<p color='#336d6f' font-size='18px'>").append("Mission result for <i>")
+                    .append(response.getHuman().getFirstName()).append("</i>:</p>");
             if (response.getPerformedActions().isEmpty()) {
                 actions.append("The mission is not executed...<br>");
                 continue;
@@ -669,7 +664,7 @@ public class WindowService implements ITesterService {
         }
         actions.append("<html><body>");
         JLabel missionResultLabel = new JLabel(actions.toString());
-        missionResultLabel.setBounds(260, 280, 500, 180);//mission result for
+        missionResultLabel.setBounds(260, 280, 500, 180);
         Font font = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         missionResultLabel.setFont(font);
         return missionResultLabel;
@@ -683,7 +678,7 @@ public class WindowService implements ITesterService {
         message.append("</body></html>");
 
         JLabel processResult = new JLabel(message.toString());
-        processResult.setBounds(260, 70, 500, 80);//they are speaking
+        processResult.setBounds(260, 70, 500, 80);
         Font childResultFont = new Font(Font.SANS_SERIF, Font.BOLD, 21);
         processResult.setFont(childResultFont);
         return processResult;
