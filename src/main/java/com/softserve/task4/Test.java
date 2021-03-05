@@ -19,11 +19,11 @@ public class Test {
                 case "1":
                     ITesterService windowTester = new WindowService(humanService);
                     windowTester.test();
-                    break;
+                    return;
                 case "2":
                     ITesterService consoleTester = new ConsoleService(humanService);
                     consoleTester.test();
-                    break;
+                    return;
                 default:
                     System.out.println("Choose how to open the app:\n1 - window\n2 - console");
             }
