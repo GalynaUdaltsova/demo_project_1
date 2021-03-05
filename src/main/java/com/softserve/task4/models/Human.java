@@ -134,5 +134,4 @@ public class Human {
                 ", weight: " + weight +
                 '}';
     }
-
 }

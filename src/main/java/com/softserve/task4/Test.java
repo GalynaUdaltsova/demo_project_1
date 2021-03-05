@@ -11,6 +11,5 @@ public class Test {
 //        ITesterService tester = new ConsoleService(humanService);
         ITesterService tester = new WindowService(humanService);
         tester.test();
-
     }
 }
